@@ -10,6 +10,7 @@ import { RoomPlanInput } from './forms/RoomPlanInput';
 import { MealPlanInput } from './forms/MealPlanInput';
 import { CalculationResultDisplay } from './results/CalculationResult';
 import { LimitTable } from './results/LimitTable';
+import { UNDER_70_INCOME_LEVELS, OVER_70_INCOME_LEVELS } from '../constants';
 
 /**
  * 高額療養費の月額上限を用いた概算ツール（令和4年10月～基準）
@@ -34,9 +35,11 @@ export default function MedicalCostEstimator() {
   // 所得区分のラベル取得
   const incomeLabel = React.useMemo(() => {
     if (formState.ageGroup === "UNDER_70") {
-      return formState.under70IncomeLevel || "C";
+      const key = formState.under70IncomeLevel || "C";
+      return UNDER_70_INCOME_LEVELS[key];
     } else {
-      return formState.over70IncomeLevel || "GENERAL";
+      const key = formState.over70IncomeLevel || "GENERAL";
+      return OVER_70_INCOME_LEVELS[key];
     }
   }, [formState.ageGroup, formState.under70IncomeLevel, formState.over70IncomeLevel]);
 

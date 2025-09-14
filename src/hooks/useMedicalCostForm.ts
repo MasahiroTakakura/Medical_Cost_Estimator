@@ -13,7 +13,7 @@ export function useMedicalCostForm() {
     under70IncomeLevel: "C",
     over70IncomeLevel: "GENERAL",
     o70Mode: "household",
-    medicalCost: 300000,
+    medicalCost: 0,
     multiCount: 0,
     roomPlan: "none",
     roomDays: 0,

@@ -14,13 +14,24 @@ export function MedicalCostInput({ value, onChange, errors }: MedicalCostInputPr
         当月の医療費総額（円） <span className="text-red-500">*</span>
       </label>
       <input
-        type="number"
+        type="text"
+        inputMode="numeric"
+        pattern="[0-9]*"
         className={`w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
           errors.medicalCost ? 'border-red-500' : 'border-gray-300'
         }`}
-        value={value}
-        min={0}
-        onChange={(e) => onChange(parseInt(e.target.value || "0", 10))}
+        value={value === 0 ? '' : value.toString()}
+        onChange={(e) => {
+          const inputValue = e.target.value;
+          if (inputValue === '') {
+            onChange(0);
+          } else {
+            const numValue = parseInt(inputValue, 10);
+            if (!isNaN(numValue) && numValue >= 0) {
+              onChange(numValue);
+            }
+          }
+        }}
         placeholder="例: 300000"
       />
       {errors.medicalCost && (

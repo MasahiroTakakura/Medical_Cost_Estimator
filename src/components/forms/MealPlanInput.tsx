@@ -35,7 +35,7 @@ export function MealPlanInput({
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="md:col-span-2">
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            区分（初期単価が自動反映されます）
+            区分（所得区分に応じて自動選択、必要に応じて変更可能）
           </label>
           <select
             className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"

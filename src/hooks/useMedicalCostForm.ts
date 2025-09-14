@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { FormState, PartialFormState, ValidationErrors, AgeGroup, Under70IncomeLevel, Over70IncomeLevel, IncomeLevel } from '../types';
 import { validateForm } from '../utils/validation';
 import { calculateMedicalCost } from '../utils/calculations';
-import { getCopayRate } from '../constants';
+import { getCopayRate, getDefaultMealPlan } from '../constants';
 
 /**
  * 医療費計算フォームの状態管理フック
@@ -46,8 +46,12 @@ export function useMedicalCostForm() {
     
     if (ageGroup === "UNDER_70") {
       updates.under70IncomeLevel = "C";
+      // 食事区分も更新
+      updates.mealPlan = getDefaultMealPlan(ageGroup, "C");
     } else {
       updates.over70IncomeLevel = "GENERAL";
+      // 食事区分も更新
+      updates.mealPlan = getDefaultMealPlan(ageGroup, "GENERAL");
     }
     
     updateFormState(updates);
@@ -55,11 +59,18 @@ export function useMedicalCostForm() {
 
   // 所得区分変更
   const handleIncomeLevelChange = (incomeLevel: IncomeLevel) => {
+    const updates: PartialFormState = {};
+    
     if (formState.ageGroup === "UNDER_70") {
-      updateFormState({ under70IncomeLevel: incomeLevel as Under70IncomeLevel });
+      updates.under70IncomeLevel = incomeLevel as Under70IncomeLevel;
     } else {
-      updateFormState({ over70IncomeLevel: incomeLevel as Over70IncomeLevel });
+      updates.over70IncomeLevel = incomeLevel as Over70IncomeLevel;
     }
+    
+    // 食事区分も更新
+    updates.mealPlan = getDefaultMealPlan(formState.ageGroup, incomeLevel);
+    
+    updateFormState(updates);
   };
 
   // 現在の所得区分を取得

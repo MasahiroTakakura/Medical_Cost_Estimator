@@ -90,10 +90,51 @@ export const ROOM_PLANS: RoomPlan[] = [
 
 // 食事プラン
 export const MEAL_PLANS: MealPlan[] = [
-  { value: "general", label: "一般", rate: 510 },
-  { value: "low2_90", label: "低所得Ⅱ（90日まで）", rate: 240 },
-  { value: "low2_91", label: "低所得Ⅱ（91日以降：長期該当）", rate: 190 },
-  { value: "low1", label: "低所得Ⅰ", rate: 110 },
+  { value: "general", label: "一般（510円/食）", rate: 510 },
+  { value: "low2_90", label: "低所得者Ⅱ（90日目まで）", rate: 240 },
+  { value: "low2_91", label: "低所得者Ⅱ（91日目以降：長期該当者）", rate: 190 },
+  { value: "low1", label: "低所得者Ⅰ（老齢福祉年金受給者）", rate: 110 },
   { value: "nambyo", label: "指定難病・小児慢性特定疾患", rate: 300 },
 ];
+
+// 所得区分に応じた食事区分の初期値
+export function getDefaultMealPlan(ageGroup: string, incomeLevel: string): string {
+  // 70歳未満
+  if (ageGroup === "UNDER_70") {
+    // 上位所得者（区分ア・イ）は一般
+    if (incomeLevel === "A" || incomeLevel === "B") {
+      return "general";
+    }
+    // 一般（区分ウ・エ）は一般
+    if (incomeLevel === "C" || incomeLevel === "D") {
+      return "general";
+    }
+    // 低所得者（区分オ）は低所得者Ⅱ（90日目まで）
+    if (incomeLevel === "E") {
+      return "low2_90";
+    }
+  }
+  
+  // 70歳以上
+  if (ageGroup === "OVER_70_74" || ageGroup === "OVER_75") {
+    // 現役並み所得者は一般
+    if (incomeLevel === "ACTIVE_III" || incomeLevel === "ACTIVE_II" || incomeLevel === "ACTIVE_I") {
+      return "general";
+    }
+    // 一般所得者は一般
+    if (incomeLevel === "GENERAL") {
+      return "general";
+    }
+    // 低所得者IIは低所得者Ⅱ（90日目まで）
+    if (incomeLevel === "LOW_II") {
+      return "low2_90";
+    }
+    // 低所得者Iは低所得者Ⅰ（老齢福祉年金受給者）
+    if (incomeLevel === "LOW_I") {
+      return "low1";
+    }
+  }
+  
+  return "general"; // デフォルト
+}
 

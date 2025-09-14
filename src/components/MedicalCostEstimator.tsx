@@ -45,9 +45,9 @@ export default function MedicalCostEstimator() {
 
   return (
     <div className="min-h-screen w-full bg-gray-50 p-4 md:p-6">
-      <div className="max-w-6xl mx-auto">
-        <header className="mb-6">
-          <h1 className="text-2xl md:text-3xl font-bold mb-2 text-gray-900">
+      <div className="max-w-7xl mx-auto">
+        <header className="mb-8">
+          <h1 className="text-2xl md:text-3xl font-bold mb-3 text-gray-900">
             高額療養費・自己負担 概算ツール（試作）
           </h1>
           <p className="text-sm text-gray-600 leading-relaxed">
@@ -57,10 +57,10 @@ export default function MedicalCostEstimator() {
           </p>
         </header>
 
-        <div className="grid lg:grid-cols-2 gap-6">
+        <div className="grid lg:grid-cols-2 gap-8">
           {/* 左：入力フォーム */}
-          <div className="bg-white rounded-2xl shadow-lg p-6 space-y-6">
-            <h2 className="text-xl font-semibold text-gray-900 border-b pb-2">入力</h2>
+          <div className="bg-white rounded-2xl shadow-lg p-6 space-y-8">
+            <h2 className="text-xl font-semibold text-gray-900 border-b pb-3">入力</h2>
 
             <AgeGroupSelector
               value={formState.ageGroup}

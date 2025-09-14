@@ -2,7 +2,7 @@ import React from 'react';
 
 export function LimitTable() {
   return (
-    <div className="mt-8 grid lg:grid-cols-2 gap-6">
+    <div className="mt-8 grid lg:grid-cols-2 gap-8">
       <div className="bg-white rounded-2xl shadow-lg p-6">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">70歳未満 上限式</h3>
         <div className="space-y-2 text-sm">

@@ -32,23 +32,27 @@ export function MealPlanInput({
   return (
     <div className="border-t pt-6">
       <h3 className="text-lg font-semibold text-gray-900 mb-4">入院時食事療養費（患者負担）</h3>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="md:col-span-2">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            区分（所得区分に応じて自動選択、必要に応じて変更可能）
-          </label>
-          <select
-            className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-            value={mealPlan}
-            onChange={(e) => onMealPlanChange(e.target.value)}
-          >
-            {MEAL_PLANS.map((plan) => (
-              <option key={plan.value} value={plan.value}>
-                {plan.label}
-              </option>
-            ))}
-          </select>
-        </div>
+      
+      {/* 区分選択 */}
+      <div className="mb-4">
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          区分（所得区分に応じて自動選択、必要に応じて変更可能）
+        </label>
+        <select
+          className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+          value={mealPlan}
+          onChange={(e) => onMealPlanChange(e.target.value)}
+        >
+          {MEAL_PLANS.map((plan) => (
+            <option key={plan.value} value={plan.value}>
+              {plan.label}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* 単価と食数 */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">単価（円/食）</label>
           <input
@@ -84,7 +88,8 @@ export function MealPlanInput({
           )}
         </div>
       </div>
-      <p className="text-xs text-gray-500 mt-2">
+      
+      <p className="text-xs text-gray-500 mt-3">
         ※ 食事の患者負担は高額療養費の対象外です。病院の案内金額に合わせて単価は調整してください。
       </p>
     </div>

@@ -18,7 +18,7 @@ export function CalculationResultDisplay({
 }: CalculationResultProps) {
   return (
     <div className="bg-white rounded-2xl shadow-lg p-6 space-y-6">
-      <h2 className="text-xl font-semibold text-gray-900 border-b pb-2">計算結果</h2>
+      <h2 className="text-xl font-semibold text-gray-900 border-b pb-3">計算結果</h2>
 
       {/* 基本情報 */}
       <div className="grid grid-cols-2 gap-4 text-sm">
